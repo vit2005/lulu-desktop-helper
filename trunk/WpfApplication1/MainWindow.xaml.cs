@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace WpfApplication1
 {
@@ -22,14 +23,16 @@ namespace WpfApplication1
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
         private MainController c;
+        private bool settingsVisible;
 
         public MainWindow()
         {
             InitializeComponent();
-            
+
             c = new MainController(this);
             c.mediaPlayer = this.mediaPlayer;
             c.PlayMusic("http://radio.goha.ru:8000/grind.fm");
+            settingsVisible = false;
         }
 
         public void PLayMusic(string s)
@@ -45,21 +48,7 @@ namespace WpfApplication1
 
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
-        }
-
-        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (VolumeSlider.Visibility == System.Windows.Visibility.Hidden){
-                VolumeSlider.Visibility = System.Windows.Visibility.Visible;
-                ChangeImage.Visibility = System.Windows.Visibility.Visible;
-                RadiostantionButton.Visibility = System.Windows.Visibility.Visible;
-            }
-            else{
-                VolumeSlider.Visibility = System.Windows.Visibility.Hidden;
-                ChangeImage.Visibility = System.Windows.Visibility.Hidden;
-                RadiostantionButton.Visibility = System.Windows.Visibility.Hidden;
-            }
+            mediaPlayer.Volume = (mediaPlayer.Volume == 0) ? mediaPlayer.Volume = VolumeSlider.Value : 0;
         }
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -78,5 +67,37 @@ namespace WpfApplication1
             r.Show();
         }
 
+        private void ShowSettings()
+        {
+            VolumeSlider.Visibility = Visibility.Visible;
+            ChangeImage.Visibility = Visibility.Visible;
+            RadiostantionButton.Visibility = Visibility.Visible;
+            settingsVisible = true;
+        }
+
+        private void HideSettings()
+        {
+            VolumeSlider.Visibility = Visibility.Hidden;
+            ChangeImage.Visibility = Visibility.Hidden;
+            RadiostantionButton.Visibility = Visibility.Hidden;
+            settingsVisible = false;
+        }
+
+        private void Window_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Window_MouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            if (settingsVisible)
+            {
+                HideSettings();
+            }
+            else
+            {
+                ShowSettings();
+            }
+        }
     }
 }
