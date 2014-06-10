@@ -24,6 +24,7 @@ namespace WpfApplication1
         private MediaPlayer mediaPlayer = new MediaPlayer();
         private MainController c;
         private bool settingsVisible;
+        private Point dragPoint;
 
         public MainWindow()
         {
@@ -40,10 +41,29 @@ namespace WpfApplication1
             c.PlayMusic(s);
         }
 
+        private void SwapSettings()
+        {
+            if (settingsVisible)
+            {
+                HideSettings();
+            }
+            else
+            {
+                ShowSettings();
+            }
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            {
+                dragPoint = new Point(Left,Top);
+                DragMove();
+                if (Left == dragPoint.X && Top == dragPoint.Y)
+                {
+                    SwapSettings();
+                }
+            }
         }
 
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -85,18 +105,9 @@ namespace WpfApplication1
 
         private void Window_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
-        }
-
-        private void Window_MouseUp_1(object sender, MouseButtonEventArgs e)
-        {
-            if (settingsVisible)
+            if (e.ChangedButton == MouseButton.Left)
             {
-                HideSettings();
-            }
-            else
-            {
-                ShowSettings();
+                Application.Current.Shutdown();
             }
         }
     }
