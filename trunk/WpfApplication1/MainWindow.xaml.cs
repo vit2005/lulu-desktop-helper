@@ -15,9 +15,6 @@ using System.Threading;
 
 namespace WpfApplication1
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -32,7 +29,7 @@ namespace WpfApplication1
 
             c = new MainController(this);
             c.mediaPlayer = this.mediaPlayer;
-            c.PlayMusic("http://radio.goha.ru:8000/grind.fm");
+            c.PlayMusic((c.LoadMusic().Any()) ? c.LoadMusic()[0] : "http://radio.goha.ru:8000/grind.fm");
             settingsVisible = false;
         }
 
