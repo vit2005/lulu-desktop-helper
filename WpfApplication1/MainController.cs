@@ -38,5 +38,21 @@ namespace WpfApplication1
             mediaPlayer.Volume = 0.1;
             mediaPlayer.Play();
         }
+
+        public List<string> LoadMusic()
+        {
+            List<string> data = new List<string>();
+            try
+            {
+                string line;
+                System.IO.StreamReader file = new System.IO.StreamReader("radio.txt");
+                while ((line = file.ReadLine()) != null)
+                {
+                    data.Add(line);
+                }
+            }
+            catch (Exception) { }
+            return data;
+        }
     }
 }

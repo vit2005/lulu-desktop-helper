@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace WpfApplication1
 {
-    /// <summary>
-    /// Логика взаимодействия для Window1.xaml
-    /// </summary>
     public partial class Radiostantion : Window
     {
         MainController _c;
@@ -28,10 +25,14 @@ namespace WpfApplication1
 
         private void RadiostantionsComboBox_Loaded(object sender, RoutedEventArgs e)
         {
-            List<string> data = new List<string>();
+            List<string> data = _c.LoadMusic();
+            
             data.Add("http://radio.goha.ru:8000/grind.fm");
             data.Add("http://animeradio.su:8000/");
+            data.Add("http://radio2.flex.ru:8000/radionami");
             data.Add("http://online-radioroks.tavrmedia.ua/RadioROKS");
+            data.Add("http://giss.tv:8000/lolradio.ogg");
+            
             var comboBox = sender as ComboBox;
             comboBox.ItemsSource = data;
             comboBox.SelectedIndex = 0;
