@@ -39,4 +39,3 @@ C:\Users\vd\Documents\Visual Studio 2012\Projects\Lulu_desktop_helper\WpfApplica
 C:\Users\vd\Documents\Visual Studio 2012\Projects\Lulu_desktop_helper\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
 C:\Users\vd\Documents\Visual Studio 2012\Projects\Lulu_desktop_helper\WpfApplication1\obj\Debug\Grind.FM.exe.manifest
 C:\Users\vd\Documents\Visual Studio 2012\Projects\Lulu_desktop_helper\WpfApplication1\obj\Debug\Grind.FM.application
-C:\Users\vd\Documents\Visual Studio 2012\Projects\Lulu_desktop_helper\WpfApplication1\obj\Debug\WpfApplication1.csprojResolveAssemblyReference.cache
