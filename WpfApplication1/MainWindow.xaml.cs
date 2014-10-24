@@ -31,6 +31,7 @@ namespace WpfApplication1
             c.mediaPlayer = this.mediaPlayer;
             c.PlayMusic((c.LoadMusic().Any()) ? c.LoadMusic()[0] : "http://radio.goha.ru:8000/grind.fm");
             settingsVisible = false;
+            this.StateChanged += new EventHandler(Window1_StateChanged);
         }
 
         public void PLayMusic(string s)
@@ -106,6 +107,14 @@ namespace WpfApplication1
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        void Window1_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+                GIFCtrl.StopAnimate();
+            else
+                GIFCtrl.StartAnimate();
         }
     }
 }
